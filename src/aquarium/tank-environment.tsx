@@ -11,8 +11,8 @@ export const THEME_CONFIGS = {
     fogDensity: 0.025,
     ambientColor: 0x0a2240,
     ambientIntensity: 1.5,
-    spotColor: 0xffffff,
-    spotIntensity: 400,
+    spotColor: 0xddddff,
+    spotIntensity: 3000,
     showRays: true,
   },
   night: {
@@ -21,7 +21,7 @@ export const THEME_CONFIGS = {
     ambientColor: 0x010815,
     ambientIntensity: 0.6,
     spotColor: 0x4080ff,
-    spotIntensity: 80,
+    spotIntensity: 2000,
     showRays: false,
   },
   abyss: {
@@ -30,7 +30,7 @@ export const THEME_CONFIGS = {
     ambientColor: 0x00020a,
     ambientIntensity: 0.2,
     spotColor: 0x22d3ee,
-    spotIntensity: 120,
+    spotIntensity: 1000,
     showRays: true,
   },
 } as const;
@@ -134,7 +134,10 @@ export function TankEnvironment({ theme }: { theme: Theme }) {
     <>
       <SceneBackground theme={theme} />
 
-      <ambientLight color={config.ambientColor} intensity={config.ambientIntensity} />
+      <ambientLight
+        color={config.ambientColor}
+        intensity={config.ambientIntensity}
+      />
       <spotLight
         color={config.spotColor}
         intensity={config.spotIntensity}

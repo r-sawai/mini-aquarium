@@ -4,6 +4,7 @@ import { CameraControls } from "./camera-controls";
 import { TankEnvironment, type Theme } from "./tank-environment";
 import { FishMesh, type FishData } from "./fish-mesh";
 import { FoodMesh, type FoodData } from "./food-mesh";
+import { SeaweedField } from "./seaweed";
 
 type Props = {
   fishes: FishData[];
@@ -20,6 +21,7 @@ export function AquariumScene({ fishes, foods, theme, onFoodRemove }: Props) {
     <>
       <CameraControls />
       <TankEnvironment theme={theme} />
+      <SeaweedField />
       {fishes.map((fish) => (
         <FishMesh
           key={fish.id}
