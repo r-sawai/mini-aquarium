@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
+/**
+ * カメラコントロールを提供するコンポーネント
+ */
 export function CameraControls() {
   const { camera, gl } = useThree();
   const controlsRef = useRef<OrbitControls | null>(null);

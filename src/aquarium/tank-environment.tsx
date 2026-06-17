@@ -18,6 +18,9 @@ export const THEME_CONFIGS = {
   },
 } as const;
 
+/**
+ * 水槽の背景色と霧を設定するコンポーネント
+ */
 function SceneBackground() {
   const { scene } = useThree();
   const config = THEME_CONFIGS["day"];
@@ -30,6 +33,9 @@ function SceneBackground() {
   return null;
 }
 
+/**
+ * 水槽の環境を表現するコンポーネント
+ */
 export function TankEnvironment() {
   const config = THEME_CONFIGS["day"];
 
@@ -193,6 +199,7 @@ export function TankEnvironment() {
         width={TANK_WIDTH}
         height={TANK_HEIGHT}
       />
+      {/* Back */}
       <GlassWall
         position={[0, 0, -TANK_DEPTH / 2]}
         rotation={[0, 0, 0]}

@@ -36,8 +36,11 @@ function SeaweedBlade({ x, z, targetHeight }: SeaweedBladeProps) {
   });
 
   const renderSegments = (index: number): ReactNode => {
+    // 再帰的にセグメントをレンダリング
     if (index >= SEGMENT_COUNT) return null;
 
+    // セグメントの上部と下部の半径を計算
+    // 下部の半径は下に行くほど細くなるように設定
     const radiusBottom = 0.25 * (1 - (index / SEGMENT_COUNT) * 0.7);
     const radiusTop = 0.25 * (1 - ((index + 1) / SEGMENT_COUNT) * 0.7);
 
@@ -48,7 +51,7 @@ function SeaweedBlade({ x, z, targetHeight }: SeaweedBladeProps) {
         }}
         position-y={index === 0 ? 0 : segmentHeight}
       >
-        {/* Offset mesh so its base sits at y=0 of the joint */}
+        {/* セグメントのジオメトリ */}
         <mesh position-y={segmentHeight / 2} castShadow receiveShadow>
           <cylinderGeometry
             args={[radiusTop, radiusBottom, segmentHeight, 5]}

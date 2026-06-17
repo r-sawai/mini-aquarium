@@ -25,7 +25,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
     onFoodEatenRef.current = onFoodEaten;
   }, [onFoodEaten]);
 
-  // Stable per-fish random state stored in a single ref object
+  // 魚の状態を保持するためのuseRef
   const fishState = useRef({
     velocity: new THREE.Vector3(
       (Math.random() - 0.5) * 0.08,
@@ -47,7 +47,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
     [],
   );
 
-  // Bake geometry transforms as in the original class
+  // 魚のボディと尾のジオメトリをuseMemoで作成して再利用
   const bodyGeo = useMemo(() => {
     const geo = new THREE.SphereGeometry(0.6, 16, 8);
     geo.scale(1.8, 1, 0.5);
@@ -61,6 +61,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
     return geo;
   }, []);
 
+  // useFrameで毎フレームの更新処理を行う
   useFrame(({ clock }) => {
     const group = groupRef.current;
     const tailJoint = tailJointRef.current;
@@ -88,7 +89,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
     velocity.y += (Math.random() - 0.5) * 0.001;
     velocity.z += (Math.random() - 0.5) * 0.002;
 
-    // Seek nearest food
+    // 食べ物の追跡
     const foodMap = foodMeshMapRef.current;
     if (foodMap.size > 0) {
       let closestId = -1;
@@ -124,7 +125,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
     velocity.clampLength(0, s.speedLimit);
     pos.add(velocity);
 
-    // Face direction of movement
+    // 魚の向きを速度ベクトルに合わせて回転させる
     if (velocity.lengthSq() > 0.0001) {
       const targetRotation = Math.atan2(-velocity.z, velocity.x);
       let diff = targetRotation - group.rotation.y;
@@ -135,7 +136,7 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
       group.rotation.z += (pitch - group.rotation.z) * 0.1;
     }
 
-    // Tail wiggle
+    // 尻尾を揺らす
     tailJoint.rotation.y = Math.sin(time * s.wiggleSpeed + s.wigglePhase) * 0.5;
   });
 

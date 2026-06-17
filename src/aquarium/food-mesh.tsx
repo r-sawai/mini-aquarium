@@ -11,6 +11,10 @@ type Props = {
   onRemove: (id: number) => void;
 };
 
+/**
+ * 単一の餌メッシュ
+ * 自律的に落下し、水槽の底に到達すると削除される
+ */
 export function FoodMesh({ data, meshMapRef, onRemove }: Props) {
   const { id, x, z } = data;
   const meshRef = useRef<THREE.Mesh>(null!);
