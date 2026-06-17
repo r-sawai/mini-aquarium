@@ -21,6 +21,7 @@ export default function App() {
   const [foods, setFoods] = useState<FoodData[]>([]);
   const [showUI, setShowUI] = useState(true);
 
+  // TODO: 一時的な処置 (削除検討)
   const spawnFish = useCallback(() => {
     const color = FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)];
     setFishes((prev) => [...prev, { id: fishIdCounter.current++, color }]);
