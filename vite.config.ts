@@ -13,5 +13,7 @@ export default defineConfig((mode) => {
 
   return {
     plugins: plugins,
+    // FIXME: Github用の一時的な処置
+    base: "/mini-aquarium/",
   };
 });
