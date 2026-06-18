@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping } from "three";
-import { EyeOff, Eye, Soup } from "lucide-react";
+import { EyeOff, Eye, Soup, Music2Icon } from "lucide-react";
 import { AquariumScene } from "./aquarium/aquarium-scene";
 import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./aquarium/constants";
 import type { FishData } from "./aquarium/fish-mesh";
 import type { FoodData } from "./aquarium/food-mesh";
+import { useBgm } from "./utils/bgm";
 
 export default function App() {
   const fishIdCounter = useRef(0);
@@ -45,6 +46,8 @@ export default function App() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  const { isPlaying, handlePlayToggle } = useBgm();
 
   return (
     <>
@@ -96,6 +99,17 @@ export default function App() {
               title="観賞モード（UI非表示）"
             >
               <EyeOff className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handlePlayToggle}
+              className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800 hover:text-cyan-400"
+              title="BGMの再生/停止"
+            >
+              {isPlaying ? (
+                <Music2Icon className="h-5 w-5" />
+              ) : (
+                <Music2Icon className="h-5 w-5 text-slate-500" />
+              )}
             </button>
           </div>
         </header>
