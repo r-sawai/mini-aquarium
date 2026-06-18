@@ -1,32 +1,28 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping } from "three";
-import { EyeOff, Eye, Soup } from "lucide-react";
+import { EyeOff, Eye, Soup, Music2Icon } from "lucide-react";
 import { AquariumScene } from "./aquarium/aquarium-scene";
 import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./aquarium/constants";
 import type { FishData } from "./aquarium/fish-mesh";
 import type { FoodData } from "./aquarium/food-mesh";
-import { _unused } from "./utils/unused";
+import { useBgm } from "./utils/bgm";
 
 export default function App() {
   const fishIdCounter = useRef(0);
   const foodIdCounter = useRef(0);
 
-  const [fishes, setFishes] = useState<FishData[]>(() =>
-    Array.from({ length: 12 }, () => ({
-      id: fishIdCounter.current++,
-      color: FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
-    })),
+  /** 魚データ */
+  const fishes = useMemo<FishData[]>(
+    () =>
+      Array.from({ length: 12 }, () => ({
+        id: fishIdCounter.current++,
+        color: FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
+      })),
+    [],
   );
   const [foods, setFoods] = useState<FoodData[]>([]);
   const [showUI, setShowUI] = useState(true);
-
-  // TODO: 一時的な処置 (削除検討)
-  const spawnFish = useCallback(() => {
-    const color = FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)];
-    setFishes((prev) => [...prev, { id: fishIdCounter.current++, color }]);
-  }, []);
-  _unused(spawnFish);
 
   const spawnFood = useCallback(() => {
     const count = 3 + Math.floor(Math.random() * 3);
@@ -50,6 +46,8 @@ export default function App() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  const { isPlaying, handlePlayToggle } = useBgm();
 
   return (
     <>
@@ -85,9 +83,10 @@ export default function App() {
 
       {/* UI オーバーレイ */}
       <div
-        className={`pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-4 transition-all duration-500 md:p-6 ${
-          showUI ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-4 transition-all duration-500 md:p-6"
+        style={{
+          display: showUI ? "flex" : "none",
+        }}
       >
         {/* ヘッダー */}
         <header className="flex w-full items-start justify-between">
@@ -100,6 +99,17 @@ export default function App() {
               title="観賞モード（UI非表示）"
             >
               <EyeOff className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handlePlayToggle}
+              className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800 hover:text-cyan-400"
+              title="BGMの再生/停止"
+            >
+              {isPlaying ? (
+                <Music2Icon className="h-5 w-5" />
+              ) : (
+                <Music2Icon className="h-5 w-5 text-slate-500" />
+              )}
             </button>
           </div>
         </header>
