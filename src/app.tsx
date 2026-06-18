@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping } from "three";
 import { EyeOff, Eye, Soup } from "lucide-react";
@@ -6,27 +6,22 @@ import { AquariumScene } from "./aquarium/aquarium-scene";
 import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./aquarium/constants";
 import type { FishData } from "./aquarium/fish-mesh";
 import type { FoodData } from "./aquarium/food-mesh";
-import { _unused } from "./utils/unused";
 
 export default function App() {
   const fishIdCounter = useRef(0);
   const foodIdCounter = useRef(0);
 
-  const [fishes, setFishes] = useState<FishData[]>(() =>
-    Array.from({ length: 12 }, () => ({
-      id: fishIdCounter.current++,
-      color: FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
-    })),
+  /** 魚データ */
+  const fishes = useMemo<FishData[]>(
+    () =>
+      Array.from({ length: 12 }, () => ({
+        id: fishIdCounter.current++,
+        color: FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
+      })),
+    [],
   );
   const [foods, setFoods] = useState<FoodData[]>([]);
   const [showUI, setShowUI] = useState(true);
-
-  // TODO: 一時的な処置 (削除検討)
-  const spawnFish = useCallback(() => {
-    const color = FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)];
-    setFishes((prev) => [...prev, { id: fishIdCounter.current++, color }]);
-  }, []);
-  _unused(spawnFish);
 
   const spawnFood = useCallback(() => {
     const count = 3 + Math.floor(Math.random() * 3);
