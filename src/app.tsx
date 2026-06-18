@@ -2,11 +2,11 @@ import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping } from "three";
 import { EyeOff, Eye, Soup, Music2Icon } from "lucide-react";
-import { AquariumScene } from "./aquarium/aquarium-scene";
-import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./aquarium/constants";
-import type { FishData } from "./aquarium/fish-mesh";
-import type { FoodData } from "./aquarium/food-mesh";
-import { useBgm } from "./utils/bgm";
+import { AquariumScene } from "./components/objects/aquarium-scene";
+import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./consts/aquarium";
+import type { FishData } from "./components/objects/fish-mesh";
+import type { FoodData } from "./components/objects/food-mesh";
+import { useBgm } from "./hooks/use-bgm";
 
 export default function App() {
   const fishIdCounter = useRef(0);

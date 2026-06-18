@@ -42,8 +42,7 @@ App (src/app.tsx)
 
 ## 重要な制約
 
-- `tsconfig.app.json` で `noUnusedLocals` / `noUnusedParameters` が有効。意図的に未使用にする変数には `src/utils/unused.ts` の `_unused()` を使う。
-- Vite のベースパスは `/mini-aquarium/`。アセットパスは相対パスかベースパスを考慮すること。
+- Vite のベースパスは拡張機能以外 `/mini-aquarium/`。アセットパスは相対パスかベースパスを考慮すること。
 - CRX プラグイン（`manifest.config.ts`）は `--mode extension` のときのみ有効。通常の Web ビルドがデフォルト。
 - `tank-environment.tsx` の `THEME_CONFIGS` は `"day"` テーマのみ実装済み。他テーマは形だけ拡張可能な状態。
 - ファイルは原則 `kebab-case` とする
