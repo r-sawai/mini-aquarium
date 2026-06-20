@@ -12,9 +12,9 @@ const toggleVariants = cva(
         default: "bg-transparent",
         outline: "border border-input bg-transparent hover:bg-muted",
         aquarium: cn(
-          "rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-white shadow-2xl",
-          "hover:bg-slate-800 hover:text-white",
-          "aria-pressed:bg-slate-900/80 data-[state=on]:bg-slate-900/80 data-[state=on]:text-cyan-400",
+          "rounded-2xl border border-border/50 p-3 bg-background/80 text-foreground shadow-2xl",
+          "hover:bg-muted",
+          "aria-pressed:bg-background/80 data-[state=on]:bg-background/80 data-[state=on]:text-primary",
         ),
       },
       size: {

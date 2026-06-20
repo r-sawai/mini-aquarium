@@ -126,7 +126,7 @@ export default function App() {
           <div className="pointer-events-auto flex flex-col gap-3 rounded-2xl border border-slate-700/50 bg-slate-900/80 p-4 backdrop-blur-md">
             <Button
               onClick={spawnFood}
-              className="bg-linear-to-r from-amber-500 to-orange-600 p-5 transition duration-200 hover:from-amber-400 hover:to-orange-500"
+              className="text-foreground bg-linear-to-r from-amber-500 to-orange-600 p-5 transition duration-200 hover:from-amber-400 hover:to-orange-500"
             >
               <Soup className="h-4 w-4" />
               エサをあげる
