@@ -6,6 +6,7 @@ import { AquariumScene } from "./components/objects/aquarium-scene";
 import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./consts/aquarium";
 import type { FoodData } from "./components/objects/food-mesh";
 import { useBgm } from "./hooks/use-bgm";
+import { Button } from "./components/ui/button";
 
 export default function App() {
   const fishIdCounter = useRef(0);
@@ -91,15 +92,14 @@ export default function App() {
         {/* ヘッダー */}
         <header className="flex w-full items-start justify-between">
           <div className="pointer-events-auto flex items-center gap-3">
-            <button
+            <Button
               onClick={() => {
                 setShowUI(false);
               }}
-              className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800"
               title="観賞モード（UI非表示）"
             >
               <EyeOff className="h-5 w-5" />
-            </button>
+            </Button>
             <button
               onClick={handlePlayToggle}
               className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800"
