@@ -81,7 +81,7 @@ export default function App() {
           className="fixed top-6 left-6 z-30"
           title="UIを表示する"
         >
-          <Eye className="size-full text-cyan-400" />
+          <Eye className="text-primary size-full" />
         </Button>
       )}
 
@@ -112,7 +112,7 @@ export default function App() {
               size="icon-xl"
             >
               {isPlaying ? (
-                <Music2Icon className="size-full text-cyan-400" />
+                <Music2Icon className="text-primary size-full" />
               ) : (
                 <Music2Icon className="size-full" />
               )}
@@ -123,7 +123,7 @@ export default function App() {
         {/* コントロールパネル */}
         <footer className="flex max-w-xl gap-4">
           {/* シミュレーション */}
-          <div className="pointer-events-auto flex flex-col gap-3 rounded-2xl border border-slate-700/50 bg-slate-900/80 p-4 backdrop-blur-md">
+          <div className="bg-background/80 border-border/50 pointer-events-auto flex flex-col gap-3 rounded-2xl border p-4 backdrop-blur-md">
             <Button
               onClick={spawnFood}
               className="text-foreground bg-linear-to-r from-amber-500 to-orange-600 p-5 transition duration-200 hover:from-amber-400 hover:to-orange-500"
