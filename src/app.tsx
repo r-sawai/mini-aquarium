@@ -6,6 +6,8 @@ import { AquariumScene } from "./components/objects/aquarium-scene";
 import { TANK_WIDTH, TANK_DEPTH, FISH_COLORS } from "./consts/aquarium";
 import type { FoodData } from "./components/objects/food-mesh";
 import { useBgm } from "./hooks/use-bgm";
+import { Button } from "./components/ui/button";
+import { Toggle } from "./components/ui/toggle";
 
 export default function App() {
   const fishIdCounter = useRef(0);
@@ -72,13 +74,15 @@ export default function App() {
 
       {/* 観賞モード中の復帰ボタン */}
       {!showUI && (
-        <button
+        <Button
           onClick={() => setShowUI(true)}
-          className="fixed top-6 left-6 z-30 rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-cyan-400 shadow-2xl transition duration-200 hover:bg-slate-800"
+          variant="aquarium"
+          size="icon-xl"
+          className="fixed top-6 left-6 z-30"
           title="UIを表示する"
         >
-          <Eye className="h-5 w-5" />
-        </button>
+          <Eye className="text-primary size-full" />
+        </Button>
       )}
 
       {/* UI オーバーレイ */}
@@ -91,40 +95,42 @@ export default function App() {
         {/* ヘッダー */}
         <header className="flex w-full items-start justify-between">
           <div className="pointer-events-auto flex items-center gap-3">
-            <button
+            <Button
               onClick={() => {
                 setShowUI(false);
               }}
-              className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800"
+              size="icon-xl"
+              variant="aquarium"
               title="観賞モード（UI非表示）"
             >
-              <EyeOff className="h-5 w-5" />
-            </button>
-            <button
+              <EyeOff className="size-full" />
+            </Button>
+            <Toggle
               onClick={handlePlayToggle}
-              className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-3 text-slate-300 shadow-2xl transition duration-200 hover:bg-slate-800"
+              variant="aquarium"
               title="BGMの再生/停止"
+              size="icon-xl"
             >
               {isPlaying ? (
-                <Music2Icon className="h-5 w-5 text-cyan-400" />
+                <Music2Icon className="text-primary size-full" />
               ) : (
-                <Music2Icon className="h-5 w-5" />
+                <Music2Icon className="size-full" />
               )}
-            </button>
+            </Toggle>
           </div>
         </header>
 
         {/* コントロールパネル */}
         <footer className="flex max-w-xl gap-4">
           {/* シミュレーション */}
-          <div className="pointer-events-auto flex flex-col gap-3 rounded-2xl border border-slate-700/50 bg-slate-900/80 p-4 backdrop-blur-md">
-            <button
+          <div className="bg-background/80 border-border/50 pointer-events-auto flex flex-col gap-3 rounded-2xl border p-4 backdrop-blur-md">
+            <Button
               onClick={spawnFood}
-              className="flex items-center justify-center gap-1.5 rounded-xl bg-linear-to-r from-amber-500 to-orange-600 px-3 py-2 text-sm font-medium text-white shadow-lg shadow-orange-950/50 transition duration-200 hover:from-amber-400 hover:to-orange-500"
+              className="text-foreground bg-linear-to-r from-amber-500 to-orange-600 p-5 transition duration-200 hover:from-amber-400 hover:to-orange-500"
             >
               <Soup className="h-4 w-4" />
               エサをあげる
-            </button>
+            </Button>
           </div>
         </footer>
       </div>

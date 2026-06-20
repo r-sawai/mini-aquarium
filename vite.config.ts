@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { crx } from "@crxjs/vite-plugin";
 import manifest from "./manifest.config.js";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig((mode) => {
@@ -13,6 +14,11 @@ export default defineConfig((mode) => {
 
   return {
     plugins: plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
     // 拡張機能ビルドの場合は、base を空にして相対パスでリソースを参照する
     base: mode.mode === "extension" ? "" : "/mini-aquarium/",
   };
