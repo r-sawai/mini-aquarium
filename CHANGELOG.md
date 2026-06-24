@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/r-sawai/mini-aquarium/compare/v1.5.0...v1.5.1) (2026-06-24)
+
+
+### Bug Fixes
+
+* デフォルトのモード設定を変更 ([57f56be](https://github.com/r-sawai/mini-aquarium/commit/57f56be989ce73c251ad739c71367d890dafee23))
+
 ## [1.5.0](https://github.com/r-sawai/mini-aquarium/compare/v1.4.0...v1.5.0) (2026-06-23)
 
 
