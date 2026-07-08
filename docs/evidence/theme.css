@@ -17,8 +17,8 @@ section {
   background: var(--color-bg);
   color: var(--color-fg);
   font-family:
-    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", Arial,
-    sans-serif;
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP",
+    "Helvetica Neue", Arial, sans-serif;
 }
 
 section h1 {
