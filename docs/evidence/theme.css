@@ -38,6 +38,12 @@ section p {
   color: var(--color-fg);
 }
 
+section p.description {
+  color: var(--color-muted);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
 section table {
   width: 100%;
   font-size: 20px;
