@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test & evidence report artifacts
+test-results
+e2e/evidence/screenshots
+docs/evidence/report.md
+docs/evidence/report.pdf
+playwright-report

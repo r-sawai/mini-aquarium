@@ -1,0 +1,113 @@
+/* @theme evidence */
+
+:root {
+  --color-bg: #0b1220;
+  --color-fg: #e8eef7;
+  --color-accent: #38bdf8;
+  --color-muted: #8ea0b8;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 210mm;
+  height: 297mm;
+  padding: 48px 56px;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family:
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+section h1 {
+  font-size: 40px;
+  color: var(--color-fg);
+  border-bottom: 4px solid var(--color-accent);
+  padding-bottom: 12px;
+}
+
+section h2 {
+  font-size: 30px;
+  color: var(--color-accent);
+}
+
+section p {
+  font-size: 20px;
+  color: var(--color-fg);
+}
+
+section table {
+  width: 100%;
+  font-size: 20px;
+  border-collapse: collapse;
+}
+
+section table th {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--color-fg);
+  text-align: left;
+  padding: 10px 14px;
+}
+
+section table td {
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+section footer {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+/* タイトルスライド */
+section.title {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.title h1 {
+  font-size: 52px;
+  border-bottom: none;
+}
+
+section.title p {
+  color: var(--color-muted);
+  font-size: 18px;
+}
+
+/* エビデンス（スクリーンショット）スライド */
+section.evidence {
+  display: flex;
+  flex-direction: column;
+}
+
+section.evidence h2 {
+  margin-bottom: 4px;
+}
+
+section.evidence p.description {
+  color: var(--color-muted);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+section.evidence .screenshot-frame {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+section.evidence .screenshot-frame img {
+  max-width: 100%;
+  max-height: 190mm;
+  object-fit: contain;
+  border-radius: 8px;
+}

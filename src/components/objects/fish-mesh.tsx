@@ -1,18 +1,9 @@
 import { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import {
-  TANK_WIDTH,
-  TANK_HEIGHT,
-  TANK_DEPTH,
-  FOOD_DETECTION_RADIUS,
-  FOOD_DETECTION_HALF_ANGLE,
-  FOOD_EATING_DISTANCE,
-} from "../../consts/aquarium";
+import { TANK_WIDTH, TANK_HEIGHT, TANK_DEPTH } from "../../consts/aquarium";
 import { useAquariumStore } from "@/hooks/use-aquarium-store";
-
-// 視野角の判定に使うcos値（毎フレーム計算しないようモジュールスコープで一度だけ算出）
-const FOOD_DETECTION_COS = Math.cos(FOOD_DETECTION_HALF_ANGLE);
+import { findClosestFoodInSight, isEatingDistance } from "@/lib/food-detection";
 
 export type FishData = { id: number; color: number };
 
@@ -110,33 +101,22 @@ export function FishMesh({ data, foodMeshMapRef, onFoodEaten }: Props) {
       const forward =
         velocity.lengthSq() > 1e-6 ? velocity.clone().normalize() : null;
 
-      let closestId = -1;
-      let minDist = FOOD_DETECTION_RADIUS;
-      let closestFoodPos: THREE.Vector3 | null = null;
-
+      const foodPositions = new Map<number, THREE.Vector3>();
       for (const [fid, mesh] of foodMap) {
-        const toFood = new THREE.Vector3().subVectors(mesh.position, pos);
-        const dist = toFood.length();
-        if (dist >= minDist) continue;
-
-        if (forward && forward.dot(toFood.normalize()) < FOOD_DETECTION_COS) {
-          continue; // 視野角の外にあるエサは無視する
-        }
-
-        minDist = dist;
-        closestId = fid;
-        closestFoodPos = mesh.position;
+        foodPositions.set(fid, mesh.position);
       }
 
-      if (closestFoodPos && closestId >= 0) {
+      const closest = findClosestFoodInSight(pos, forward, foodPositions);
+
+      if (closest) {
         const dir = new THREE.Vector3()
-          .subVectors(closestFoodPos, pos)
+          .subVectors(closest.position, pos)
           .normalize();
         velocity.addScaledVector(dir, 0.008);
 
-        if (minDist < FOOD_EATING_DISTANCE) {
-          foodMap.delete(closestId);
-          onFoodEatenRef.current(closestId);
+        if (isEatingDistance(closest.distance)) {
+          foodMap.delete(closest.id);
+          onFoodEatenRef.current(closest.id);
           s.speedLimit = 0.15;
           setTimeout(() => {
             s.speedLimit = 0.06 + Math.random() * 0.04;
