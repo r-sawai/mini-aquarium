@@ -68,6 +68,8 @@ pnpm report
 
 生成物（`test-results/`, `e2e/evidence/screenshots/`, `docs/evidence/report.md`, `docs/evidence/report.pdf`）は Git 管理対象外です。
 
+GitHub Actions の `Test Evidence Report` ワークフロー（`workflow_dispatch` のみ、手動実行）でも同様の一連の流れを実行でき、結果は Actions の Artifacts から `report.pdf` としてダウンロードできます。
+
 ## デプロイ
 
 `main` ブランチへのプッシュで GitHub Actions が自動的に GitHub Pages へデプロイします。
